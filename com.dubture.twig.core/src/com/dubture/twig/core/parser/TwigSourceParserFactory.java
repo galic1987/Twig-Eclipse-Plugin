@@ -9,11 +9,11 @@
 package com.dubture.twig.core.parser;
 
 import org.eclipse.dltk.ast.parser.IModuleDeclaration;
+import org.eclipse.dltk.ast.parser.ISourceParser;
+import org.eclipse.dltk.ast.parser.ISourceParserFactory;
 import org.eclipse.dltk.compiler.env.IModuleSource;
 import org.eclipse.dltk.compiler.problem.IProblemReporter;
 import org.eclipse.php.internal.core.compiler.ast.parser.PHPSourceParserFactory;
-
-import com.dubture.twig.core.util.Debug;
 
 /**
  * {@link TwigSourceParserFactory} overrides parse()
@@ -25,11 +25,16 @@ import com.dubture.twig.core.util.Debug;
  *
  */
 @SuppressWarnings("restriction")
-public class TwigSourceParserFactory extends PHPSourceParserFactory {
+public class TwigSourceParserFactory extends PHPSourceParserFactory implements
+ISourceParserFactory, ISourceParser {
 
 	public TwigSourceParserFactory() {
 
 	}
+	
+	public ISourceParser createSourceParser() {
+		return this;
+	}	
 
 
 	@Override

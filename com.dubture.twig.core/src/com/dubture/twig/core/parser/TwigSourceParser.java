@@ -20,8 +20,10 @@ import org.eclipse.dltk.ast.parser.IModuleDeclaration;
 import org.eclipse.dltk.ast.parser.ISourceParser;
 import org.eclipse.dltk.compiler.problem.IProblemReporter;
 import org.eclipse.php.internal.core.compiler.ast.parser.AbstractPHPSourceParser;
+import org.eclipse.php.internal.core.compiler.ast.parser.php53.CompilerAstLexer;
 
 import com.dubture.twig.core.log.Logger;
+import com.dubture.twig.core.parser.ast.scanner.TwigAstLexer;
 import com.dubture.twig.core.parser.error.TwigErrorReporter;
 
 
@@ -59,7 +61,9 @@ ISourceParser {
 	public IModuleDeclaration parse(Reader in, IProblemReporter reporter,
 			boolean useShortTags) throws Exception {
 
-
+		TwigAstLexer lexer = new TwigAstLexer(in);		
+		System.err.println(lexer.next_token().value);
+		
 		this.problemReporter = reporter;
 		BufferedReader br = new BufferedReader(in);
 		this.reporter = new TwigErrorReporter(problemReporter, fileName);
